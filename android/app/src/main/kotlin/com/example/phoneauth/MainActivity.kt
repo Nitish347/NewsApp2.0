@@ -1,4 +1,4 @@
-package com.example.newsapp2
+package com.example.phoneauth
 
 import io.flutter.embedding.android.FlutterActivity
 

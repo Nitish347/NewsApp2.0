@@ -1,4 +1,4 @@
-# newsapp2
+# phoneauth
 
 A new Flutter project.
 

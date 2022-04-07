@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "543444217913",
+    "project_id": "phone-number-3660c",
+    "storage_bucket": "phone-number-3660c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:543444217913:android:ca1af48f09059c7b2b1de8",
+        "android_client_info": {
+          "package_name": "com.example.phoneauth"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "543444217913-de11pk486b32qb5d46et1a7tjbrqf4mn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBe8F6Ng_X6JHDNHF7kypQ_KW3RDFnUClk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "543444217913-de11pk486b32qb5d46et1a7tjbrqf4mn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
