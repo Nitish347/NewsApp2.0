@@ -14,6 +14,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+
   final headingStyle =
       TextStyle(fontSize: 60, fontWeight: FontWeight.bold, color: Colors.teal);
 
@@ -47,13 +48,13 @@ class _HomeState extends State<Home> {
       body: Column(
         children: [
           Container(
-            height: MediaQuery.of(context).size.height / 5,
+            height: 170,
             width: double.maxFinite,
             decoration: BoxDecoration(color: Colors.teal.withOpacity(0.6)),
             child: Padding(
               padding: EdgeInsets.all(10.0),
               child: Stack(children: [
-                Positioned(
+                const Positioned(
                     bottom: 70,
                     left: 5,
                     child: Icon(
@@ -92,8 +93,10 @@ class _HomeState extends State<Home> {
                       child: Container(
                         height: 45,
                         width: 45,
-                        child: Image.asset(
-                          "assets/images/weather.png",
+                        child: CircleAvatar(
+                          child: Image.asset(
+                            "assets/images/weather.png",
+                          ),
                         ),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
@@ -116,6 +119,7 @@ class _HomeState extends State<Home> {
   }
 
   void weather() {
+    TextEditingController city  = TextEditingController();
     showDialog(
         context: context,
         builder: (context) {
@@ -123,20 +127,7 @@ class _HomeState extends State<Home> {
             filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
             child: AlertDialog(
               backgroundColor: Colors.teal.withOpacity(0.4),
-              content: Container(
-                height: MediaQuery.of(context).size.height / 1.5,
-                width: double.maxFinite,
-                child: Column(
-                  children: [
-                    Container(
-                        height: 100,
-                        width: 100,
-                        child: Image.asset(
-                          "assets/images/weather.png",
-                        )),
-                  ],
-                ),
-              ),
+              content: WeatherPage()
             ),
           );
         });

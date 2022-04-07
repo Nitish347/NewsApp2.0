@@ -12,6 +12,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  bool _otpSending = false;
+
   final TextEditingController _phoneNumber = TextEditingController();
   final TextEditingController _otp = TextEditingController();
   FirebaseAuth auth = FirebaseAuth.instance;
@@ -41,7 +43,7 @@ class _LoginPageState extends State<LoginPage> {
         child: Column(
           children: [
             SizedBox(
-              height: 70,
+              height: MediaQuery.of(context).size.height/10,
             ),
             Center(
               child: Container(
@@ -72,11 +74,11 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
             SizedBox(
-              height: MediaQuery.of(context).size.height / 50,
+              height: MediaQuery.of(context).size.height /25,
             ),
             Text("Log In", style: GoogleFonts.poppins(textStyle: loginStyle)),
             SizedBox(
-              height: MediaQuery.of(context).size.height / 50,
+              height: MediaQuery.of(context).size.height / 25,
             ),
             Padding(
               padding: EdgeInsets.all(20.0),
@@ -180,6 +182,7 @@ class _LoginPageState extends State<LoginPage> {
                       if (otp_visible == true) {
                         verifycode();
                       } else {
+                        _otpSending = true;
                         verify();
                       }
 
@@ -218,6 +221,7 @@ class _LoginPageState extends State<LoginPage> {
           verficationID_received = verficationID;
           setState(() {
             otp_visible = true;
+
           });
         },
         codeAutoRetrievalTimeout: (String verficationID) {});
