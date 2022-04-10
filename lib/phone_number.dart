@@ -1,11 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:phoneauth/otpPage.dart';
+import 'package:phoneauth/save%20data/shared_preferences.dart';
 
 import 'chooseLanguage.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
 
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -22,6 +23,7 @@ class _LoginPageState extends State<LoginPage> {
 
   bool otp_visible = false;
   bool _buttonPressed = true;
+  SaveData nnnn = new SaveData();
 
   final loginStyle = TextStyle(
     fontSize: 50,
@@ -101,8 +103,7 @@ class _LoginPageState extends State<LoginPage> {
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(10.0),
                     ),
-                    child: Column(
-                      children: [
+                    child:
                         Container(
                           padding: EdgeInsets.all(8.0),
                           decoration: BoxDecoration(),
@@ -114,23 +115,6 @@ class _LoginPageState extends State<LoginPage> {
                                 hintStyle: TextStyle(color: Colors.teal[200])),
                           ),
                         ),
-                        Visibility(
-                          visible: otp_visible,
-                          child: Container(
-                            padding: EdgeInsets.all(8.0),
-                            child: TextField(
-                              controller: _otp,
-                              obscureText: true,
-                              decoration: InputDecoration(
-                                  border: InputBorder.none,
-                                  hintText: "OTP",
-                                  hintStyle:
-                                      TextStyle(color: Colors.teal[200])),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
                   ),
                   SizedBox(
                     height: MediaQuery.of(context).size.height / 12,
@@ -176,16 +160,13 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                     onTap: () {
-                      setState(() {
-                        _buttonPressed = false;
-                      });
-                      if (otp_visible == true) {
-                        verifycode();
-                      } else {
-                        _otpSending = true;
-                        verify();
+                      // nnnn.getSaveData();
+                      // nnnn.setSaveData(true);
+                      // print("${nnnn.status} ye h status");
+                      // nnnn.removeData("loggedIn");
+                      if(_phoneNumber.text.isNotEmpty){
+                        Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext)=>OTP_Verification(phoneNumber: _phoneNumber.text)));
                       }
-
                     },
 
                   ),
@@ -204,38 +185,5 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
-  }
-
-  void verify() {
-    auth.verifyPhoneNumber(
-        phoneNumber: _phoneNumber.text,
-        verificationCompleted: (PhoneAuthCredential credential) async {
-          await auth.signInWithCredential(credential).then((value) {
-            print("login successfully");
-          });
-        },
-        verificationFailed: (FirebaseAuthException exception) {
-          print(exception.message);
-        },
-        codeSent: (String verficationID, int? resendtoken) {
-          verficationID_received = verficationID;
-          setState(() {
-            otp_visible = true;
-
-          });
-        },
-        codeAutoRetrievalTimeout: (String verficationID) {});
-  }
-
-  void verifycode() async {
-    PhoneAuthCredential credential = PhoneAuthProvider.credential(
-        verificationId: verficationID_received, smsCode: _otp.text);
-    await auth.signInWithCredential(credential).then((value) {
-      print("logged in successfully");
-      Navigator.of(context).push(MaterialPageRoute(
-          builder: (BuildContext context) =>
-              Choose_Language()));
-
-    });
   }
 }

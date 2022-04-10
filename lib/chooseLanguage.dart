@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:phoneauth/save%20data/shared_preferences.dart';
 
 import 'home.dart';
 
@@ -9,13 +10,14 @@ void main() {
 }
 
 class Choose_Language extends StatefulWidget {
-  const Choose_Language({Key? key}) : super(key: key);
+
 
   @override
   _Choose_LanguageState createState() => _Choose_LanguageState();
 }
 
 class _Choose_LanguageState extends State<Choose_Language> {
+  SaveData _saveData = new SaveData();
   String language = "";
   final languageStyle = TextStyle(fontSize:30,fontWeight: FontWeight.bold,color: Colors.teal.withOpacity(0.7));
   @override
@@ -48,8 +50,7 @@ class _Choose_LanguageState extends State<Choose_Language> {
                   onTap: (){
                     setState(() {
                       language = "english";
-                      Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext)=>Home(language: language)));
-                      print("english");
+                      Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext)=>Home()));
                     });
                   },
                   child: Container(
@@ -85,9 +86,10 @@ class _Choose_LanguageState extends State<Choose_Language> {
                   onTap: (){
                     setState(() {
                       language = "hindi";
+
                       print("hindi");
                       // Home(language: language);
-                      Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext)=>Home(language: language)));
+                      Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext)=>Home()));
                     });
                   },
                   child: Container(

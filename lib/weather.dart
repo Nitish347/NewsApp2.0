@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 import 'package:phoneauth/weatherModel.dart';
 
 class WeatherPage extends StatefulWidget {
-  const WeatherPage({Key? key}) : super(key: key);
+
 
   @override
   _WeatherPageState createState() => _WeatherPageState();

@@ -3,11 +3,13 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:phoneauth/Tabs/breaking_news.dart';
+import 'package:phoneauth/Tabs/breaking_news_tab.dart';
 import 'package:phoneauth/weather.dart';
 
 class Home extends StatefulWidget {
-  String language;
-  Home({required this.language});
+  // String language;
+  // Home({required this.language});
 
   @override
   State<Home> createState() => _HomeState();
@@ -35,11 +37,7 @@ class _HomeState extends State<Home> {
     // borderRadius: BorderRadius.circular(120.0),
   );
 
-  @override
-  void initState() {
-    print(widget.language);
-    super.initState();
-  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +48,7 @@ class _HomeState extends State<Home> {
           Container(
             height: 170,
             width: double.maxFinite,
-            decoration: BoxDecoration(color: Colors.teal.withOpacity(0.6)),
+            decoration: BoxDecoration(color: Colors.white.withOpacity(0.2)),
             child: Padding(
               padding: EdgeInsets.all(10.0),
               child: Stack(children: [
@@ -73,7 +71,7 @@ class _HomeState extends State<Home> {
                     ),
                   ]),
                 )),
-                const Positioned(
+                 const Positioned(
                   bottom: 15,
                   left: 5,
                   child: Icon(
@@ -88,7 +86,6 @@ class _HomeState extends State<Home> {
                     child: InkWell(
                       onTap: () {
                         weather();
-                        // Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context)=> Weather() ));
                       },
                       child: Container(
                         height: 45,
@@ -112,7 +109,52 @@ class _HomeState extends State<Home> {
                     )),
               ]),
             ),
-          )
+          ),
+          DefaultTabController(length: 6, child: Column(
+            children: [
+              Container(
+                color: Colors.grey.withOpacity(0.5),
+
+                child: TabBar(
+                  isScrollable: true,
+                  indicatorColor: Colors.teal,
+                  indicatorWeight: 5,
+
+                  tabs: [
+                    Tab(child: Text("Breaking News",style: TextStyle(color: Colors.black),)),
+                    Tab(child: Text("Politics",style: TextStyle(color: Colors.black),)),
+                    Tab(child: Text("Entertainment",style: TextStyle(color: Colors.black),)),
+                    Tab(child: Text("Sports",style: TextStyle(color: Colors.black),)),
+                    Tab(child: Text("Business",style: TextStyle(color: Colors.black),)),
+                    Tab(child: Text("Technology",style: TextStyle(color: Colors.black),)),
+
+                  ],
+                ),
+              ),
+              Container(
+                height: MediaQuery.of(context).size.height/1.4,
+                // width: double.maxFinite,
+                child:
+                TabBarView(
+                  children: [
+                    Container(
+                      height : MediaQuery.of(context).size.height,
+                        color: Colors.greenAccent,
+                        child: BreakingNewsTab()
+                    ),
+                    Container(
+                      color: Colors.yellowAccent,
+                      // height: 20,
+                    ),
+                    Text("l1dfghjhgfd"),
+                    Text("l1dfghjhgfd"),
+                    Text("l1dfghjhgfd"),
+                    Text("l1dfghjhgfd"),
+                  ],
+                ),
+              )
+            ],
+          ))
         ],
       ),
     );
@@ -124,7 +166,7 @@ class _HomeState extends State<Home> {
         context: context,
         builder: (context) {
           return BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
+            filter: ImageFilter.blur(sigmaX: 3.0, sigmaY: 3.0),
             child: AlertDialog(
               backgroundColor: Colors.teal.withOpacity(0.4),
               content: WeatherPage()
