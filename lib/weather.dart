@@ -122,119 +122,121 @@ class _WeatherPageState extends State<WeatherPage> {
             SizedBox(height: 5,),
              _show ? Container(
                height: 50,
-               child: Center(
+               child: const Center(
                  child: Text("You didn't search anything!",style: TextStyle(color: Colors.grey,fontSize:20),),
                ),
              ) :
              Container(),
-             _loading ? Center(child: CircularProgressIndicator(color: Colors.amber,)) :  _searched ?Container(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "${weatherModel.name}",
-                    overflow: TextOverflow.ellipsis,
-                    style: GoogleFonts.poppins(
-                        textStyle: TextStyle(
-                            fontSize: 40,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.white)),
-                  ),
-                  Text(
-                    "${weatherModel.region}, ${weatherModel.country}",
-                    style: GoogleFonts.arsenal(
-                        textStyle: TextStyle(
-                      fontSize: 20,
-                      color: Colors.white70,
-                    )),
-                  ),
-                  Text(
-                    "${weatherModel.temp_c}°C",
-                    style: GoogleFonts.poppins(
-                        textStyle: TextStyle(
-                            fontSize: 60,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white)),
-                  ),
-
-                  Text("Wind Direction: ${weatherModel.wind_dir}",style: TextStyle(color: Colors.grey),),
-                  SizedBox(
-                    height:8,
-                  ),
-                  Stack(children: [
-                    Container(
-                      height: 120,
-                      width: double.maxFinite,
-                      decoration: BoxDecoration(
-                          color: Colors.amber,
-                          borderRadius: BorderRadius.circular(100)),
+             _loading ? Center(child: CircularProgressIndicator(color: Colors.amber,)) :  Visibility(
+               visible: _searched,
+               child: Container(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "${weatherModel.name}",
+                      overflow: TextOverflow.ellipsis,
+                      style: GoogleFonts.poppins(
+                          textStyle: const TextStyle(
+                              fontSize: 40,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.white)),
                     ),
-                    Padding(
-                      padding: EdgeInsets.all(30.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Column(
-                            children: [
-                              Text("Wind",
-                                  style:
-                                      TextStyle(fontWeight: FontWeight.bold)),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              Icon(CupertinoIcons.wind),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              Text("${weatherModel.wind_mph}",
-                                  style: TextStyle(fontWeight: FontWeight.bold))
-                            ],
-                          ),
-                          Column(
-                            children: [
-                              Text("Humidity",
-                                  style:
-                                      TextStyle(fontWeight: FontWeight.bold)),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              Icon(CupertinoIcons.cloud_sun_rain_fill),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              Text("${weatherModel.humidity}",
-                                  style: TextStyle(fontWeight: FontWeight.bold))
-                            ],
-                          ),
-                          Column(
-                            children: [
-                              Text(
-                                "Temperature",
-                                style: TextStyle(fontWeight: FontWeight.bold),
-                              ),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              Icon(
-                                CupertinoIcons.thermometer,
-                              ),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              Text(
-                                "${weatherModel.temp_f}°F",
-                                style: TextStyle(fontWeight: FontWeight.bold),
-                              )
-                            ],
-                          )
-                        ],
+                    Text(
+                      "${weatherModel.region}, ${weatherModel.country}",
+                      style: GoogleFonts.arsenal(
+                          textStyle: const TextStyle(
+                        fontSize: 20,
+                        color: Colors.white70,
+                      )),
+                    ),
+                    Text(
+                      "${weatherModel.temp_c}°C",
+                      style: GoogleFonts.poppins(
+                          textStyle: const TextStyle(
+                              fontSize: 60,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white)),
+                    ),
+
+                    Text("Wind Direction: ${weatherModel.wind_dir}",style: TextStyle(color: Colors.grey),),
+                    const SizedBox(
+                      height:8,
+                    ),
+                    Stack(children: [
+                      Container(
+                        height: 120,
+                        width: double.maxFinite,
+                        decoration: BoxDecoration(
+                            color: Colors.amber,
+                            borderRadius: BorderRadius.circular(100)),
                       ),
-                    )
-                  ])
-                ],
-              ),
-            ) : Container(
-            )
+                      Padding(
+                        padding: EdgeInsets.all(30.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
+                              children: [
+                                const Text("Wind",
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold)),
+                                const SizedBox(
+                                  height: 5,
+                                ),
+                                Icon(CupertinoIcons.wind),
+                                const SizedBox(
+                                  height: 5,
+                                ),
+                                Text("${weatherModel.wind_mph}",
+                                    style: TextStyle(fontWeight: FontWeight.bold))
+                              ],
+                            ),
+                            Column(
+                              children: [
+                                const Text("Humidity",
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold)),
+                                const SizedBox(
+                                  height: 5,
+                                ),
+                                Icon(CupertinoIcons.cloud_sun_rain_fill),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Text("${weatherModel.humidity}",
+                                    style: TextStyle(fontWeight: FontWeight.bold))
+                              ],
+                            ),
+                            Column(
+                              children: [
+                                Text(
+                                  "Temperature",
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Icon(
+                                  CupertinoIcons.thermometer,
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Text(
+                                  "${weatherModel.temp_f}°F",
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                )
+                              ],
+                            )
+                          ],
+                        ),
+                      )
+                    ])
+                  ],
+                ),
+            ),
+             )
           ],
         ),
       ),

@@ -1,6 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:phoneauth/Tabs/breaking_news.dart';
+
 import 'package:phoneauth/Tabs/breaking_news_tab.dart';
 import 'package:phoneauth/chooseLanguage.dart';
 import 'package:phoneauth/home.dart';
