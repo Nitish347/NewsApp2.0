@@ -32,9 +32,9 @@ class NewsTile extends StatelessWidget {
                 Stack(
                   children: [
                     Padding(
-                      padding: EdgeInsets.only(bottom: 20),
+                      padding: EdgeInsets.only(bottom: 15),
                       child: Container(
-                        color: Colors.teal.withOpacity(0.3),
+                        color: Colors.tealAccent.withOpacity(0.5),
                         child: Padding(
                           padding: EdgeInsets.only(left: 10, right: 10, top: 5),
                           child: Container(
@@ -42,7 +42,7 @@ class NewsTile extends StatelessWidget {
                               children: [
                                 Text(
                                   title,
-                                  style: const TextStyle(
+                                  style:  TextStyle(
                                       fontSize: 20,
                                       color: Colors.black,
                                       fontWeight: FontWeight.bold),
@@ -58,7 +58,7 @@ class NewsTile extends StatelessWidget {
                                 ),
                                 Container(
                                   height:
-                                      MediaQuery.of(context).size.height / 15,
+                                      MediaQuery.of(context).size.height / 20,
                                 ),
                               ],
                             ),

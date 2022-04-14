@@ -2,44 +2,23 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:phoneauth/Tabs/Politics_tab.dart';
+import 'package:phoneauth/Constants/constants.dart';
 import 'package:phoneauth/Tabs/breaking_news_tab.dart';
-import 'package:phoneauth/weather.dart';
-
-
+import 'package:phoneauth/Tabs/business_tab.dart';
+import 'package:phoneauth/Tabs/entertainments_tab.dart';
+import 'package:phoneauth/Tabs/health_tab.dart';
+import 'package:phoneauth/Tabs/sports_tab.dart';
+import 'package:phoneauth/Tabs/technology.dart';
+import 'package:phoneauth/country/country.dart';
+import 'package:phoneauth/weather/weather.dart';
 
 class Home extends StatefulWidget {
-  // String language;
-  // Home({required this.language});
 
   @override
   State<Home> createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
-
-  final headingStyle =
-      TextStyle(fontSize: 60, fontWeight: FontWeight.bold, color: Colors.teal);
-
-  final decoration = BoxDecoration(
-    boxShadow: [
-      BoxShadow(
-        color: Colors.white.withOpacity(0.8),
-        offset: Offset(-6.0, -6.0),
-        blurRadius: 16.0,
-      ),
-      BoxShadow(
-        color: Colors.teal.withOpacity(0.4),
-        offset: Offset(6.0, 6.0),
-        blurRadius: 16.0,
-      ),
-    ],
-    color: Color(0xFFEFEEEE),
-    // borderRadius: BorderRadius.circular(120.0),
-  );
-
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,21 +44,21 @@ class _HomeState extends State<Home> {
                   Center(
                       child: Text(
                     "NEWS",
-                    style: GoogleFonts.arsenal(textStyle: headingStyle, shadows: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.3),
-                        offset: Offset(6.0, 6.0),
-                        blurRadius: 16.0,
-                      ),
-                    ]),
+                    style: GoogleFonts.arsenal(textStyle: Constants.headingStyle, shadows: Constants.boxShadow1
+                    ),
                   )),
-                   const Positioned(
+                    Positioned(
                     bottom: 15,
                     left: 5,
-                    child: Icon(
-                      CupertinoIcons.bars,
-                      size: 35,
-                      color: Colors.teal,
+                    child: InkWell(
+                      onTap: (){
+                        country();
+                      },
+                      child: const Icon(
+                        CupertinoIcons.bars,
+                        size: 35,
+                        color: Colors.teal,
+                      ),
                     ),
                   ),
                   Positioned(
@@ -94,25 +73,19 @@ class _HomeState extends State<Home> {
                           width: 45,
                           child: CircleAvatar(
                             child: Image.asset(
-                              "assets/images/weather.png",
+                              "assets/images/weather report.png",
                             ),
                           ),
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black.withOpacity(0.4),
-                                  offset: Offset(6.0, 6.0),
-                                  blurRadius: 16.0,
-                                ),
-                              ],
+                              boxShadow: Constants.boxShadow1,
                               color: Colors.teal),
                         ),
                       )),
                 ]),
               ),
             ),
-            DefaultTabController(length: 5, child: Column(
+            DefaultTabController(length: 6, child: Column(
               children: [
                 Container(
                   color: Colors.grey.withOpacity(0.5),
@@ -121,14 +94,13 @@ class _HomeState extends State<Home> {
                     isScrollable: true,
                     indicatorColor: Colors.teal,
                     indicatorWeight: 5,
-
                     tabs: [
-                      Tab(child: Text("Breaking News",style: TextStyle(color: Colors.black),)),
-                      Tab(child: Text("Entertainment",style: TextStyle(color: Colors.black),)),
-                      Tab(child: Text("Sports",style: TextStyle(color: Colors.black),)),
-                      Tab(child: Text("Business",style: TextStyle(color: Colors.black),)),
-                      Tab(child: Text("Technology",style: TextStyle(color: Colors.black),)),
-
+                      Tab(child: Text("Breaking News",style: Constants.tabStyle,)),
+                      Tab(child: Text("Entertainment",style: Constants.tabStyle,)),
+                      Tab(child: Text("Sports",style: Constants.tabStyle,)),
+                      Tab(child: Text("Business",style: Constants.tabStyle,)),
+                      Tab(child: Text("Technology",style: Constants.tabStyle,)),
+                      Tab(child: Text("Health",style:Constants.tabStyle,)),
                     ],
                   ),
                 ),
@@ -139,10 +111,11 @@ class _HomeState extends State<Home> {
                   TabBarView(
                     children: [
                       BreakingNewsTab(),
-                     PoliticsTab(),
-                      Text("l1dfghjhgfd"),
-                      Text("l1dfghjhgfd"),
-                      Text("l1dfghjhgfd"),
+                      EntertainmentTab(),
+                      SportsTab(),
+                      BusinessTab(),
+                      TechnologyTab(),
+                      HealthTab()
                     ],
                   ),
                 )
@@ -167,5 +140,21 @@ class _HomeState extends State<Home> {
             ),
           );
         });
+  }
+
+  void country() {
+    TextEditingController country  = TextEditingController();
+    showDialog(
+        context: context,
+        builder: (context) {
+          return BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 3.0, sigmaY: 3.0),
+            child: AlertDialog(
+              backgroundColor: Colors.teal.withOpacity(0.6),
+              content: Country()
+            ),
+          );
+        }
+        );
   }
 }

@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
-import 'package:phoneauth/weatherModel.dart';
+import 'package:phoneauth/weather/weatherModel.dart';
 
 class WeatherPage extends StatefulWidget {
 
@@ -45,7 +45,6 @@ class _WeatherPageState extends State<WeatherPage> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Container(
-        // height: MediaQuery.of(context).size.height / 1.5,
         width: double.maxFinite,
         child: Column(
           children: [
@@ -66,7 +65,7 @@ class _WeatherPageState extends State<WeatherPage> {
                 height: MediaQuery.of(context).size.height / 50,
                 width: MediaQuery.of(context).size.width / 50,
                 child: Image.asset(
-                  "assets/images/weather.png",
+                  "assets/images/weather report.png",
                 ),
               ),
             ),
@@ -90,7 +89,7 @@ class _WeatherPageState extends State<WeatherPage> {
                             hintText: "Search Country/City Name",
                             hintStyle: TextStyle(
                               fontSize: 15,
-                              color: Colors.grey
+                              color: Colors.amber
                             ),
                             border: InputBorder.none,
                           ),
@@ -204,7 +203,7 @@ class _WeatherPageState extends State<WeatherPage> {
                                 SizedBox(
                                   height: 5,
                                 ),
-                                Text("${weatherModel.humidity}",
+                                Text("${weatherModel.humidity}%",
                                     style: TextStyle(fontWeight: FontWeight.bold))
                               ],
                             ),

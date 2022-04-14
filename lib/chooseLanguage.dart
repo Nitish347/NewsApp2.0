@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:phoneauth/save%20data/shared_preferences.dart';
+import 'package:phoneauth/LoginPage.dart';
+
 
 import 'home.dart';
 
@@ -11,13 +12,11 @@ void main() {
 
 class Choose_Language extends StatefulWidget {
 
-
   @override
   _Choose_LanguageState createState() => _Choose_LanguageState();
 }
 
 class _Choose_LanguageState extends State<Choose_Language> {
-  SaveData _saveData = new SaveData();
   String language = "";
   final languageStyle = TextStyle(fontSize:30,fontWeight: FontWeight.bold,color: Colors.teal.withOpacity(0.7));
   @override
@@ -33,8 +32,8 @@ class _Choose_LanguageState extends State<Choose_Language> {
               Padding(
                   padding: EdgeInsets.all(15),
                   child: Text(
-                    "Language",
-                    style: GoogleFonts.arsenal(textStyle: TextStyle(fontSize: 60,fontWeight: FontWeight.w700,color: Colors.teal,shadows: <Shadow>[
+                    "Welcome ${LoginPage.Name}",
+                    style: GoogleFonts.arsenal(textStyle: TextStyle(fontSize: 50,fontWeight: FontWeight.w700,color: Colors.teal,shadows: <Shadow>[
                       Shadow(
                         color: Colors.black.withOpacity(0.4),
                         offset: Offset(5.0, 5.0),

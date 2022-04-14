@@ -1,20 +1,24 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:phoneauth/Constants/constants.dart';
 import 'package:phoneauth/otpPage.dart';
-import 'package:phoneauth/save%20data/shared_preferences.dart';
 
 import 'chooseLanguage.dart';
 
 class LoginPage extends StatefulWidget {
+static String Name = "";
 
   @override
   _LoginPageState createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
+  void getName(){
+    LoginPage.Name = name.text;
+  }
   bool _otpSending = false;
-
+  final TextEditingController name = new TextEditingController();
   final TextEditingController _phoneNumber = TextEditingController();
   final TextEditingController _otp = TextEditingController();
   FirebaseAuth auth = FirebaseAuth.instance;
@@ -23,7 +27,7 @@ class _LoginPageState extends State<LoginPage> {
 
   bool otp_visible = false;
   bool _buttonPressed = true;
-  SaveData nnnn = new SaveData();
+
 
   final loginStyle = TextStyle(
     fontSize: 50,
@@ -51,22 +55,7 @@ class _LoginPageState extends State<LoginPage> {
               child: Container(
                 height: 180,
                 width: 180,
-                decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.white.withOpacity(0.5),
-                      // offset: Offset(-6.0, -6.0),
-                      blurRadius: 16.0,
-                    ),
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.4),
-                      offset: Offset(6.0, 6.0),
-                      blurRadius: 16.0,
-                    ),
-                  ],
-                  color: Color(0xFFEFEEEE),
-                  borderRadius: BorderRadius.circular(120.0),
-                ),
+                decoration: Constants.decorationNeumorphic2,
                 child: Center(
                     child: Image.asset(
                   "assets/images/splash.jpg",
@@ -86,23 +75,27 @@ class _LoginPageState extends State<LoginPage> {
               padding: EdgeInsets.all(20.0),
               child: Column(
                 children: [
+
+                Container(
+                  // padding: EdgeInsets.all(.0),
+                  decoration: Constants.decorationNeumorphic3,
+                  child:
+                  Container(
+                    padding: EdgeInsets.all(8.0),
+                    decoration: BoxDecoration(),
+                    child: TextField(
+                      controller: name,
+                      decoration: InputDecoration(
+                          border: InputBorder.none,
+                          hintText: "Enter Your Name",
+                          hintStyle: TextStyle(color: Colors.teal[200])),
+                    ),
+                  ),
+                ),
+                  SizedBox(height: 10,),
                   Container(
                     // padding: EdgeInsets.all(.0),
-                    decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.white.withOpacity(0.8),
-                          blurRadius: 16.0,
-                        ),
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.15),
-                          offset: Offset(6.0, 7.0),
-                          blurRadius: 16.0,
-                        ),
-                      ],
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
+                    decoration:Constants.decorationNeumorphic3,
                     child:
                         Container(
                           padding: EdgeInsets.all(8.0),
@@ -110,12 +103,14 @@ class _LoginPageState extends State<LoginPage> {
                           child: TextField(
                             controller: _phoneNumber,
                             decoration: InputDecoration(
+                              prefix: Text("+91",style: TextStyle(color: Colors.black),),
                                 border: InputBorder.none,
-                                hintText: "Phone Number",
+                                hintText: " Phone Number",
                                 hintStyle: TextStyle(color: Colors.teal[200])),
                           ),
                         ),
                   ),
+
                   SizedBox(
                     height: MediaQuery.of(context).size.height / 12,
                   ),
@@ -124,33 +119,9 @@ class _LoginPageState extends State<LoginPage> {
                       curve: Curves.fastOutSlowIn,
                       duration: Duration(seconds: 5),
                       height: 50,
-                      decoration: BoxDecoration(
-                        boxShadow: _buttonPressed
-                            ? [
-                                BoxShadow(
-                                  color: Colors.white.withOpacity(0.8),
-                                  blurRadius: 16.0,
-                                ),
-                                BoxShadow(
-                                  color: Colors.black.withOpacity(0.6),
-                                  offset: Offset(6.0, 6.0),
-                                  blurRadius: 16.0,
-                                ),
-                              ]
-                            : null,
-                        color: Colors.teal,
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                      child: Center(
-                        child: otp_visible
-                            ? const Text(
-                                "Verify OTP",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              )
-                            : const Text(
+                      decoration: Constants.decorationNeumorphic,
+                      child: const Center(
+                        child: Text(
                                 "Send OTP",
                                 style: TextStyle(
                                   color: Colors.white,
@@ -160,10 +131,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                     onTap: () {
-                      // nnnn.getSaveData();
-                      // nnnn.setSaveData(true);
-                      // print("${nnnn.status} ye h status");
-                      // nnnn.removeData("loggedIn");
+                      getName();
                       if(_phoneNumber.text.isNotEmpty){
                         Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext)=>OTP_Verification(phoneNumber: _phoneNumber.text)));
                       }
@@ -173,11 +141,7 @@ class _LoginPageState extends State<LoginPage> {
                   SizedBox(
                     height: MediaQuery.of(context).size.height / 20,
                   ),
-                  const Text(
-                    "Gmail",
-                    style: TextStyle(
-                        color: Colors.teal, fontWeight: FontWeight.bold),
-                  ),
+
                 ],
               ),
             )

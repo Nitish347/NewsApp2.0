@@ -1,39 +1,26 @@
-import 'dart:io';
-
-import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
-
-import 'package:webview_flutter/webview_flutter.dart';
-
 
 import '../NewsModel/BreakingNewsModel.dart';
 import '../NewsModel/NewsTile.dart';
 
-class BreakingNewsTab extends StatefulWidget {
+class TechnologyTab extends StatefulWidget {
   static String country="in";
 
-
-
-
   @override
-  _BreakingNewsTabState createState() => _BreakingNewsTabState();
+  State<TechnologyTab> createState() => _TechnologyTabState();
 }
 
-class _BreakingNewsTabState extends State<BreakingNewsTab> {
-
-
+class _TechnologyTabState extends State<TechnologyTab> {
   List<NewsModel> newsList = new List<NewsModel>();
   bool _loading = false;
-  String ctr = BreakingNewsTab.country;
+  String ctr = TechnologyTab.country;
 
 
   void initState(){
     getNews(ctr);
-    setState(() {
-
-    });
     super.initState();
   }
 
@@ -43,7 +30,7 @@ class _BreakingNewsTabState extends State<BreakingNewsTab> {
     });
     newsList = new List();
     String api_url =
-        "https://newsapi.org/v2/top-headlines?country=$country&apiKey=2b826ea9d85542a898f1ef683de48b71";
+        "https://newsapi.org/v2/top-headlines?country=$country&category=technology&apiKey=2b826ea9d85542a898f1ef683de48b71";
     var response = await http.get(Uri.parse(api_url));
 
     Map<String, dynamic> jsonData = json.decode(response.body);
@@ -102,4 +89,5 @@ class _BreakingNewsTabState extends State<BreakingNewsTab> {
     );
   }
 }
+
 

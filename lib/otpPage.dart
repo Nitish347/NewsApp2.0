@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:phoneauth/save%20data/shared_preferences.dart';
+import 'package:phoneauth/Constants/constants.dart';
+import 'package:phoneauth/Intro/intro.dart';
+
 
 import 'chooseLanguage.dart';
 class OTP_Verification extends StatefulWidget {
@@ -30,8 +32,6 @@ class _OTP_VerificationState extends State<OTP_Verification> {
 
   bool otp_visible = false;
 
-  SaveData _saveData = new SaveData();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,21 +46,7 @@ class _OTP_VerificationState extends State<OTP_Verification> {
                 Text("Verify ${widget.phoneNumber}",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.teal),),
                 SizedBox(height: MediaQuery.of(context).size.height/30,),
                 Container(
-                decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.white.withOpacity(0.8),
-                      blurRadius: 16.0,
-                    ),
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.2),
-                      offset: Offset(6.0, 7.0),
-                      blurRadius: 16.0,
-                    ),
-                  ],
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
+                decoration: Constants.decorationNeumorphic3,
                 child:
                      Container(
                         padding: EdgeInsets.all(8.0),
@@ -90,22 +76,7 @@ class _OTP_VerificationState extends State<OTP_Verification> {
               },
               child: Container(
                 height: 50,
-                decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.white.withOpacity(0.8),
-                      blurRadius: 16.0,
-                    ),
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.6),
-                      offset: Offset(6.0, 6.0),
-                      blurRadius: 16.0,
-                    ),
-                  ],
-
-                  color: Colors.teal,
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
+                decoration: Constants.decorationNeumorphic,
                 child:  const Center(
                   child: Text(
                       "Verify OTP",
@@ -127,7 +98,7 @@ class _OTP_VerificationState extends State<OTP_Verification> {
 
   void verify() {
     auth.verifyPhoneNumber(
-        phoneNumber: widget.phoneNumber,
+        phoneNumber: "+91${widget.phoneNumber}",
         verificationCompleted: (PhoneAuthCredential credential) async {
           await auth.signInWithCredential(credential).then((value) {
             print("login successfully");
@@ -151,10 +122,9 @@ class _OTP_VerificationState extends State<OTP_Verification> {
         verificationId: verficationID_received, smsCode: _otp.text);
     await auth.signInWithCredential(credential).then((value) {
       print("logged in successfully");
-      _saveData.setSaveData(true);
       Navigator.of(context).push(MaterialPageRoute(
           builder: (BuildContext context) =>
-              Choose_Language()));
+              Intro()));
 
     });
   }
